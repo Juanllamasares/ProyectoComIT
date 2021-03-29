@@ -1,7 +1,6 @@
 package com.comIT.SOSmascotas.entidades;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-public abstract class Usuario implements Serializable{
+public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -25,8 +24,6 @@ public abstract class Usuario implements Serializable{
 	private String contraseña;
 	private Administrador administrador;
 	@OneToMany
-	private List <Reporte> reportes = new ArrayList<>();
-	
-	
+	private List <Reporte> reportes;
 
 }
