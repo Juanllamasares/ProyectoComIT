@@ -2,6 +2,8 @@ package com.comIT.SOSmascotas.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
+@DiscriminatorValue("USUARIO")
 public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;

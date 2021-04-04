@@ -1,9 +1,6 @@
 package com.comIT.SOSmascotas.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.comIT.SOSmascotas.entidades.Reporte;
-import com.comIT.SOSmascotas.repositories.ReporteRepository;
+import com.comIT.SOSmascotas.entidades.Administrador;
+import com.comIT.SOSmascotas.repositories.AdministradorRepository;
 
 @Controller
-@RequestMapping("/reportes")
-public class ReporteController {
+@RequestMapping("/administrador")
+public class AdministradorController {
 	
 	@Autowired
-	private ReporteRepository repo;
+	private AdministradorRepository repo;
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -34,39 +31,39 @@ public class ReporteController {
 		return "about";
 	}
 
-    //devuelve un listado de reportes
+    //devuelve un listado de administradores
 	@RequestMapping("/listado")
 	public String list(Model model) {
-		model.addAttribute("reportes", repo.findAll());
+		model.addAttribute("contactos", repo.findAll());
 		return "listado";
 	}
-    //guarda un reporte
+    //guarda un administrador
 	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
-	public String guardarMascota(@RequestParam(value = "fechaCreacion") String fechaCreacion,Model model) throws ParseException {
+	public String guardarMascota(@RequestParam(value = "correo") String correo, @RequestParam(value = "contraseña") String contraseña,Model model) throws ParseException {
 
-		Date fecha = new SimpleDateFormat("yyyy-mm-dd").parse(fechaCreacion);
-		
-		Reporte reporte = new Reporte();
-		reporte.setFechaCreacion(fecha);
-		repo.save(reporte);
-		model.addAttribute("reporte", reporte);
+		Administrador admin = new Administrador();
+		admin.setCorreo(correo);
+		admin.setContraseña(contraseña);
+		repo.save(admin);
+		model.addAttribute("administrador", admin);
 		return "redirect:/listado";
 	}
-    //borra una mascota por id
+    //borra un administrador por id
     @PostMapping(value = "/borrar/{id}")
-	public String reporteBorrado(@PathVariable(value = "id") long id, Model model) {
+	public String contactoBorrado(@PathVariable(value = "id") long id, Model model) {
 		try {
 			repo.deleteById(id);
 		} catch (Exception e) {
-			model.addAttribute("error", "No se pudo eliminar el reporte");
+			model.addAttribute("error", "No se pudo eliminar el administrador");
 			return "error";
 		}
-		return "reporte borrado";
+		return "administrador borrado";
 	}
 
 	@GetMapping(value = "/error")
 	public String error() {
 		return "error";
 	}
+
 
 }

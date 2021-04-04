@@ -1,73 +1,70 @@
 package com.comIT.SOSmascotas.controller;
 
-import java.util.List;
-
-import javax.websocket.server.PathParam;
+import java.text.ParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.comIT.SOSmascotas.entidades.Usuario;
 import com.comIT.SOSmascotas.repositories.UsuarioRepository;
 
-@RestController
-@RequestMapping("/api/usuarios")
+@Controller
+@RequestMapping("/usuarios")
 public class UsuarioController {
 	
+	@Autowired
 	private UsuarioRepository repo;
 	
-	@Autowired
-	public UsuarioController(UsuarioRepository repo) {
-		this.repo = repo;
+	@GetMapping("/")
+	public String getIndex() {
+		return "index";
 	}
 
-	//agrega un usuario
-	@GetMapping(value = "/add")
-	public ResponseEntity<Wrapper> getUsuario(@PathParam(value = "correo")String correo,@PathParam(value = "contraseña")String contraseña){
-		Wrapper wrapper = new Wrapper();
+	@RequestMapping("/about")
+	public String about() {
+		return "about";
+	}
+
+    //devuelve un listado de usuarios
+	@RequestMapping("/listado")
+	public String list(Model model) {
+		model.addAttribute("usuarios", repo.findAll());
+		return "listado";
+	}
+    //guarda un usuario
+	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
+	public String guardarMascota(@RequestParam(value = "correo") String correo, @RequestParam(value = "contraseña") String contraseña,Model model) throws ParseException {
+
 		Usuario usuario = new Usuario();
 		usuario.setCorreo(correo);
 		usuario.setContraseña(contraseña);
 		repo.save(usuario);
-		wrapper.object=usuario;
-		wrapper.status="El usuario fue agregado";
-		return new ResponseEntity<Wrapper>(wrapper,HttpStatus.CREATED);
+		model.addAttribute("usuario", usuario);
+		return "redirect:/listado";
 	}
-	
-	//me devuelve una lista de usuarios
-	
-	@GetMapping(value = "/")
-    public ResponseEntity<List<Usuario>> getUsuarios(){
-		return new ResponseEntity<List<Usuario>>((List<Usuario>) repo.findAll(),HttpStatus.OK);
+    //borra un usuario por id
+    @PostMapping(value = "/borrar/{id}")
+	public String usuarioBorrado(@PathVariable(value = "id") long id, Model model) {
+		try {
+			repo.deleteById(id);
+		} catch (Exception e) {
+			model.addAttribute("error", "No se pudo eliminar el usuario");
+			return "error";
+		}
+		return "usuario borrado";
 	}
-	
-	//elimino un usuario por id
-	
-	@DeleteMapping(value = "/delete")
-	public ResponseEntity<Wrapper>deleteUsuario(@PathParam(value = "id")Long id){
-		Wrapper wrapper = new Wrapper();
-		
-	    try {
-		   Usuario usuario = repo.findById(id).get();
-		   repo.delete(usuario);
-		   wrapper.status = "El usuario "+id+" fue eliminado";
-	   } catch (Exception e) {
-		   wrapper.status = "El usuario no fue encontrado";
-	   }
-	
-	   return new ResponseEntity<Wrapper>(wrapper,HttpStatus.OK);
-		
+
+	@GetMapping(value = "/error")
+	public String error() {
+		return "error";
 	}
-	
-	public class Wrapper {
-		public String status;
-		public Object object;
-		
-	}
-	
+
+
 }
