@@ -40,7 +40,7 @@ public class UsuarioController {
 	}
     //guarda un usuario
 	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
-	public String guardarMascota(@RequestParam(value = "correo") String correo, @RequestParam(value = "contraseña") String contraseña,Model model) throws ParseException {
+	public String guardarUsuario(@RequestParam(value = "correo") String correo, @RequestParam(value = "contraseña") String contraseña,Model model) throws ParseException {
 
 		Usuario usuario = new Usuario();
 		usuario.setCorreo(correo);

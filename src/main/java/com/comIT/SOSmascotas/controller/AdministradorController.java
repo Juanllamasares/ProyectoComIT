@@ -34,12 +34,12 @@ public class AdministradorController {
     //devuelve un listado de administradores
 	@RequestMapping("/listado")
 	public String list(Model model) {
-		model.addAttribute("contactos", repo.findAll());
+		model.addAttribute("admins", repo.findAll());
 		return "listado";
 	}
     //guarda un administrador
 	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
-	public String guardarMascota(@RequestParam(value = "correo") String correo, @RequestParam(value = "contraseña") String contraseña,Model model) throws ParseException {
+	public String guardarAdmin(@RequestParam(value = "correo") String correo, @RequestParam(value = "contraseña") String contraseña,Model model) throws ParseException {
 
 		Administrador admin = new Administrador();
 		admin.setCorreo(correo);
@@ -50,7 +50,7 @@ public class AdministradorController {
 	}
     //borra un administrador por id
     @PostMapping(value = "/borrar/{id}")
-	public String contactoBorrado(@PathVariable(value = "id") long id, Model model) {
+	public String adminBorrado(@PathVariable(value = "id") long id, Model model) {
 		try {
 			repo.deleteById(id);
 		} catch (Exception e) {

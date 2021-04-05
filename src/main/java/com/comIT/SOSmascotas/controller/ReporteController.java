@@ -42,7 +42,7 @@ public class ReporteController {
 	}
     //guarda un reporte
 	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
-	public String guardarMascota(@RequestParam(value = "fechaCreacion") String fechaCreacion,Model model) throws ParseException {
+	public String guardarReporte(@RequestParam(value = "fechaCreacion") String fechaCreacion,Model model) throws ParseException {
 
 		Date fecha = new SimpleDateFormat("yyyy-mm-dd").parse(fechaCreacion);
 		
