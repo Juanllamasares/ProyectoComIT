@@ -49,7 +49,7 @@ public class ContactoController {
 		return "crear";
 	}
     //guarda un contacto
-	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
+	@RequestMapping(value = "/guardarContacto", method = { RequestMethod.POST, RequestMethod.PUT })
 	public String guardarContacto(@RequestParam(value = "nombre") String nombre, @RequestParam(value = "telefono") int telefono,@RequestParam(value = "whatsApp")int whatsApp,
 			Model model) throws ParseException {
 

@@ -50,7 +50,7 @@ public class ReporteController {
 		return "crear";
 	}
     //guarda un reporte
-	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
+	@RequestMapping(value = "/guardarReporte", method = { RequestMethod.POST, RequestMethod.PUT })
 	public String guardarReporte(@RequestParam(value = "fechaCreacion") String fechaCreacion,Model model) throws ParseException {
 
 		Date fecha = new SimpleDateFormat("yyyy-mm-dd").parse(fechaCreacion);
@@ -59,7 +59,7 @@ public class ReporteController {
 		reporte.setFechaCreacion(fecha);
 		repo.save(reporte);
 		model.addAttribute("reporte", reporte);
-		return "redirect:/listado";
+		return "listado";
 	}
     //borra un reporte por id
     @PostMapping(value = "/borrar/{id}")

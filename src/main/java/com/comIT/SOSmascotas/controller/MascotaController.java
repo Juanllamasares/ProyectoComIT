@@ -48,7 +48,7 @@ public class MascotaController {
 			return "crear";
 		}
     //guarda una mascota
-	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
+	@RequestMapping(value = "/guardarMascota", method = { RequestMethod.POST, RequestMethod.PUT })
 	public String guardarMascota(@RequestParam(value = "descripcion") String descripcion, @RequestParam(value = "ubicacion") String ubicacion,
 			Model model) throws ParseException {
 

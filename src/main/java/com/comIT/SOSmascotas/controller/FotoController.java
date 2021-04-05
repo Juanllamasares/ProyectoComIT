@@ -51,7 +51,7 @@ public class FotoController {
 		return "crear";
 	}
 	//guarda una foto
-	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
+	@RequestMapping(value = "/guardarFoto", method = { RequestMethod.POST, RequestMethod.PUT })
 	public String guardarFoto(@RequestParam("foto") MultipartFile file,Model model) throws ParseException {
 
 		

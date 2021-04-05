@@ -49,7 +49,7 @@ public class EstadoController {
 				return "crear";
 			}
     //guarda un estado
-	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
+	@RequestMapping(value = "/guardarEstado", method = { RequestMethod.POST, RequestMethod.PUT })
 	public String guardarEstado(@RequestParam(value = "nombre") String nombre,Model model) throws ParseException {
 
 		Estado estado = new Estado();
