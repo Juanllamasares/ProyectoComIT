@@ -38,6 +38,16 @@ public class ContactoController {
 		model.addAttribute("contactos", repo.findAll());
 		return "listado";
 	}
+	
+	//crea un contacto
+	@RequestMapping("/crear")
+	public String crear(Model model) {
+		Contacto contacto = new Contacto();
+		contacto.setNombre(new String());
+		model.addAttribute("contacto", contacto);
+
+		return "crear";
+	}
     //guarda un contacto
 	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
 	public String guardarContacto(@RequestParam(value = "nombre") String nombre, @RequestParam(value = "telefono") int telefono,@RequestParam(value = "whatsApp")int whatsApp,

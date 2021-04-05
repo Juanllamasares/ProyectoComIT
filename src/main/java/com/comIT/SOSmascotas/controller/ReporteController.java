@@ -40,6 +40,15 @@ public class ReporteController {
 		model.addAttribute("reportes", repo.findAll());
 		return "listado";
 	}
+	//crea un reporte
+	@RequestMapping("/crear")
+	public String crear(Model model) {
+		Reporte reporte = new Reporte();
+		reporte.setFechaCreacion(new Date());
+		model.addAttribute("reporte", reporte);
+
+		return "crear";
+	}
     //guarda un reporte
 	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
 	public String guardarReporte(@RequestParam(value = "fechaCreacion") String fechaCreacion,Model model) throws ParseException {
@@ -52,7 +61,7 @@ public class ReporteController {
 		model.addAttribute("reporte", reporte);
 		return "redirect:/listado";
 	}
-    //borra una mascota por id
+    //borra un reporte por id
     @PostMapping(value = "/borrar/{id}")
 	public String reporteBorrado(@PathVariable(value = "id") long id, Model model) {
 		try {

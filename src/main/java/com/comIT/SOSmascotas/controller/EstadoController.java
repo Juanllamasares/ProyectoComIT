@@ -38,6 +38,16 @@ public class EstadoController {
 		model.addAttribute("estados", repo.findAll());
 		return "listado";
 	}
+	
+	//crea una estado
+			@RequestMapping("/crear")
+			public String crear(Model model) {
+				Estado estado = new Estado();
+				estado.setNombre(new String());
+				model.addAttribute("estado", estado);
+
+				return "crear";
+			}
     //guarda un estado
 	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
 	public String guardarEstado(@RequestParam(value = "nombre") String nombre,Model model) throws ParseException {

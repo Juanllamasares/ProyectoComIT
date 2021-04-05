@@ -37,6 +37,17 @@ public class AdministradorController {
 		model.addAttribute("admins", repo.findAll());
 		return "listado";
 	}
+	
+	//crea un administrador
+			@RequestMapping("/crear")
+			public String crear(Model model) {
+				Administrador admin = new Administrador();
+				admin.setCorreo(new String());
+				admin.setContraseña(new String());
+				model.addAttribute("administrador", admin);
+
+				return "crear";
+			}
     //guarda un administrador
 	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
 	public String guardarAdmin(@RequestParam(value = "correo") String correo, @RequestParam(value = "contraseña") String contraseña,Model model) throws ParseException {

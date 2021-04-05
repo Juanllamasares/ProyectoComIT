@@ -37,6 +37,16 @@ public class MascotaController {
 		model.addAttribute("mascotas", repo.findAll());
 		return "listado";
 	}
+	
+	//crea una mascota
+		@RequestMapping("/crear")
+		public String crear(Model model) {
+			Mascota mascota = new Mascota();
+			mascota.setUbicacion(new String());
+			model.addAttribute("mascota", mascota);
+
+			return "crear";
+		}
     //guarda una mascota
 	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
 	public String guardarMascota(@RequestParam(value = "descripcion") String descripcion, @RequestParam(value = "ubicacion") String ubicacion,

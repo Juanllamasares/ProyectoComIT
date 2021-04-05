@@ -31,6 +31,17 @@ public class UsuarioController {
 	public String about() {
 		return "about";
 	}
+	
+	//crea un reporte
+		@RequestMapping("/crear")
+		public String crear(Model model) {
+			Usuario usuario = new Usuario();
+			usuario.setCorreo(new String());
+			usuario.setContraseña(new String());
+			model.addAttribute("usuario", usuario);
+
+			return "crear";
+		}
 
     //devuelve un listado de usuarios
 	@RequestMapping("/listado")

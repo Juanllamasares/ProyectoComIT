@@ -40,6 +40,16 @@ public class FotoController {
 		model.addAttribute("fotos", repo.findAll());
 		return "listado";
 	}
+	
+	//crea una foto
+	@RequestMapping("/crear")
+	public String crear(Model model) {
+	     Foto foto = new Foto();
+		foto.setFoto(new String());
+		model.addAttribute("foto", foto);
+
+		return "crear";
+	}
 	//guarda una foto
 	@RequestMapping(value = "/guardar", method = { RequestMethod.POST, RequestMethod.PUT })
 	public String guardarFoto(@RequestParam("foto") MultipartFile file,Model model) throws ParseException {
