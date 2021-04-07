@@ -15,10 +15,21 @@
 		<h1>Reportar mascota</h1>
 		<div class="container">
 			<form th:action="@{/reportes/guardarReporte}" method="post" class="form-group" th:object=${reporte}>
-				<div class="form-group">
-				<label for="fechaCreacion">Fecha de Creacion</label>
-				    <input class="form-control" type="date" value="${fechaCreacion}" id="fechaCreacion" name="fechaCreacion" th:field="*{fechaCreacion}">
-				</div>		
+				<div class="custom-file mb-4">
+			        <label for="foto">Foto</label>
+				    <input type="file" name="foto" class="custom-file-input" id="foto"> 
+				    <label class="custom-file-label"for="foto">foto</label>
+			    </div>	
+			    <div>
+					<label for="estado">Estado</label>
+					<select name="estado" th:field="*{estado}">
+					   <option value="PERDIDA">Perdida</option>
+					   <option value="ABANDONADA">Abandonada</option>
+					   <option value="EN_TRANSITO">Tránsito</option>
+					   <option value="EN_ADOPCION">En adopción</option>
+					</select>
+								
+			   </div>
 			   <div class="form-group">
 					<label for="ubicacion">Ubicacion de la mascota</label>
 					<input type="text" class="form-control" id="ubicacion" name="ubicacion" th:field="*{mascota.ubicacion}"/>				
@@ -27,16 +38,14 @@
 					<label for="descripcion">Descripcion de la mascota</label>
 					<input type="text" class="form-control" id="descripcion" name="descripcion" th:field="*{mascota.descripcion}"/>				
 				</div>
-<!-- 			   <div class="form-group"> -->
-<!-- 					<label for="estado">Estado</label> -->
-<!-- 					<input type="text" class="form-control" id="estado" name="estado" /> -->
-<!-- 				</div> -->
-			    <div class="custom-file mb-4">
-			        <label for="estado">Foto</label>
-				    <input type="file" name="file" class="custom-file-input"
-					id="customFile"> <label class="custom-file-label"
-					for="customFile">foto</label>
-			</div>
+<!-- 			<div class="form-group"> -->
+<!-- 		    	<label for="estado">Estado</label> -->
+<!-- 				<input type="text" class="form-control" id="estado" name="estado" /> -->
+<!-- 			</div> -->
+			   <div class="form-group">
+				 <label for="fechaCreacion">Fecha de Creacion</label>
+				 <input class="form-control" type="date" value="${fechaCreacion}" id="fechaCreacion" name="fechaCreacion" th:field="*{fechaCreacion}">
+				</div>	
 			<h2>Contacto</h2>
 			   <div class="form-group">
 					<label for="telefono">Nombre</label>
@@ -44,7 +53,7 @@
 			   </div>
 			   <div class="form-group">
 					<label for="telefono">Telefono</label>
-					<input type="text" class="form-control" id="telefono" name="telefono"/>
+					<input type="text" class="form-control" id="telefono" name="telefono" th:field="*{contacto.telefono}"/>
 			   </div>
 			   <div class="form-group">
 					<label for="whatsApp">WhatsApp</label>

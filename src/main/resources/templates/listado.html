@@ -22,25 +22,28 @@
 			  <thead>
 			    <tr>
 			      <th scope="col">#</th>
-			      <th scope="col">Fecha</th>
+			      <th scope="col">Foto</th>
+			      <th scope="col">Estado</th>
 			      <th scope="col">Ubicacion</th>
 			      <th scope="col">Descripcion</th>
-			      <th scope="col">Estado</th>
+			      <th scope="col">Fecha</th>
 			      <th scope="col">Denunciante</th>
-			      <th scope="col">Tel</th>
+			      <th scope="col">Telefono</th>
+			      <th scope="col">whatsApp</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 				<tr th:each="reporte, iter : ${reportes}">
 			      	<th scope="row" th:text="${iter.index + 1}" />
-				    <td th:text="${reporte.fechaCreacion}" />
+				    <th scope="row" th:text="${reporte.foto}"/>
+				    <td th:text="${reporte.estado.descripcion}" />
 	  			    <td th:text="${reporte.mascota.ubicacion}" />
 				    <td th:text="${reporte.mascota.descripcion}" />
-				    <td th:text="${reporte.estado}" />
+				    <td th:text="${reporte.fechaCreacion}" />
 				    <td th:text="${reporte.contacto.nombre}" />
 				    <td th:text="${reporte.contacto.telefono}" />
-				    <td th:if="${reporte.contacto}"><form th:action="@{|/conf-borrar/?id=${reporte.id}|}" method="post"><button type="submit" class="btn btn-danger">Borrar</button></form></td>
-	   			    <td th:if="!${reporte}"><button type="button" class="btn btn-success">Activar</button></td>
+				    <td th:text="${reporte.contacto.whatsApp}" />
+				    <td th:field="${reporte}"><form th:action="@{|/borrar/id/?id=${reporte.id}|}" method="post"><button type="submit" class="btn btn-danger">Borrar</button></form></td>
 				</tr>
 			  </tbody>
 			</table>

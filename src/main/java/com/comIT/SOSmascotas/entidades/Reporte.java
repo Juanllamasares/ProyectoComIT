@@ -39,5 +39,8 @@ public class Reporte implements Serializable {
 	Mascota mascota;
 	@OneToOne(cascade = CascadeType.ALL)
 	Contacto contacto;
+	@OneToOne(cascade = CascadeType.ALL)
+	Foto foto;
+	
 
 }
