@@ -43,7 +43,7 @@
 				    <td th:text="${reporte.contacto.nombre}" />
 				    <td th:text="${reporte.contacto.telefono}" />
 				    <td th:text="${reporte.contacto.whatsApp}" />
-				    <td th:field="${reporte}"><form th:action="@{|/borrar/id/?id=${reporte.id}|}" method="post"><button type="submit" class="btn btn-danger">Borrar</button></form></td>
+				    <td th:field="${reporte}"><form th:action="@{|/reportes/borrar/${reporte.id}|}" method="post"><button type="submit" class="btn btn-danger">Borrar</button></form></td>
 				</tr>
 			  </tbody>
 			</table>
